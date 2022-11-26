@@ -8,6 +8,7 @@ export default class CreateListing extends Component {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeItem = this.onChangeItem.bind(this);
     this.onChangeItemNumber = this.onChangeItemNumber.bind(this);
     this.onChangeAmount = this.onChangeAmount.bind(this);
     this.onChangeFinalProfit = this.onChangeFinalProfit.bind(this);
@@ -17,15 +18,26 @@ export default class CreateListing extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: '',
+      username: "",
       itemnumber: 0,
       amount: 0,
       finalprofit: 0,
       listinglink: "",
       dateadded: new Date(),
       datesold: new Date(),
+      item: {
+        itemnumber: 0,
+        itemname: "",
+        category: "",
+        price: 0,
+        cost: 0,
+        shippingcost: 0,
+        fees: 0,
+        imagelink: "",
+      },
+      items: [],
       users: [],
-      items: []
+      itemnumbers: []
     }
   }
 
@@ -36,15 +48,16 @@ export default class CreateListing extends Component {
           this.setState({
             users: response.data.map(user => user.username),
             username: response.data[0].username
-          });
+          }); 
         }
       });
     axios.get('http://localhost:5000/items/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
-            items: response.data.map(item => item.itemnumber + ' - ' + item.itemname),
-            itemnumber: response.data[0].itemnumber
+            items: response.data.map(item => item),
+            itemnumber: response.data[0].itemnumber,
+            item: response.data[0]
           });
         }
       });
@@ -54,6 +67,13 @@ export default class CreateListing extends Component {
     this.setState({
       username: e.target.value
     });
+  }
+
+  onChangeItem(e) {
+    this.setState({
+      item: JSON.parse(e.target.value)
+    });
+    this.onChangeItemNumber(e);
   }
 
   onChangeItemNumber(e) {
@@ -97,7 +117,7 @@ export default class CreateListing extends Component {
 
     const listing = {
       username: this.state.username,
-      itemnumber: this.state.itemnumber,
+      item: this.state.item,
       amount: this.state.amount,
       finalprofit: this.state.finalprofit,
       listinglink: this.state.listinglink,
@@ -111,7 +131,7 @@ export default class CreateListing extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log('Error: ' + err));
 
-    window.location = '/';
+    window.location = '/listings';
 
   }
 
@@ -145,12 +165,12 @@ export default class CreateListing extends Component {
               required
               className='form-control'
               value={this.state.itemnumber}
-              onChange={this.onChangeItemNumber}>
+              onChange={this.onChangeItem}>
               {
                 this.state.items.map(function (item) {
                   return <option
-                    key={item}
-                    value={item}>{item}
+                    key={item.itemnumber}
+                    value={JSON.stringify(item)}>{item.itemnumber} - {item.itemname}
                   </option>
                 })
               }
