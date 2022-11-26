@@ -10,6 +10,7 @@ import Dashboard from './components/dashboard-component';
 import EditItem from './components/edititem-component';
 import EditListing from './components/editlisting-component';
 import ViewListings from './components/viewlistings-component';
+import ViewItem from './components/viewitem-component';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/listings" exact element={<ViewListings />} />
             <Route path="/user/create" exact element={<CreateUser />} />
             <Route path="/item/create" exact element={<CreateItem />} />
+            <Route path="/item/:id" exact element={<ViewItem />} />
             <Route path="/item/edit/:id" exact element={<EditItem />} />
             <Route path="/listing/create" exact element={<CreateListing />} />
             <Route path="/listing/edit/:id" exact element={<EditListing />} />
