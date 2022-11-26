@@ -9,7 +9,7 @@ const itemSchema = new Schema({
     price: { type: Number, required: true },
     cost: { type: Number, required: true },
     shippingcost: { type: Number, required: true },
-    fees: { type: String, Number: true },
+    fees: { type: Number, Number: true },
     imagelink: { type: String, required: true },
 });
 

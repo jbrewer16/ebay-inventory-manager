@@ -9,7 +9,7 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const username = req.body.username;
-    const itemnumber = Number(req.body.itemnumber);
+    const item = req.body.item;
     const amount = Number(req.body.amount);
     const finalprofit = Number(req.body.finalprofit);
     const listinglink = req.body.listinglink;
@@ -18,7 +18,7 @@ router.route('/add').post((req, res) => {
 
     const newListing = new Listing({
         username,
-        itemnumber,
+        item,
         amount,
         finalprofit,
         listinglink,
@@ -47,7 +47,7 @@ router.route('/update/:id').post((req, res) => {
     Listing.findById(req.params.id)
         .then(listing => {
             listing.username = req.body.username;
-            listing.itemnumber = Number(req.body.itemnumber);
+            listing.item = req.body.item;
             listing.amount = Number(req.body.amount);
             listing.finalprofit = Number(req.body.finalprofit);
             listing.listinglink = req.body.listinglink;
