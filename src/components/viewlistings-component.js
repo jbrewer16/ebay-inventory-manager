@@ -5,7 +5,8 @@ import axios from 'axios';
 
 const Listing = props => (
   <tr>
-    <td>{props.listing.item.itemname}</td>
+    {/* <td>{props.listing.item.itemname}</td> */}
+    <td><a href={'/item/' + props.listing.item._id}>{props.listing.item.itemname}</a></td>
     <td>{props.listing.item.category}</td>
     <td>{props.listing.amount}</td>
     <td>$
