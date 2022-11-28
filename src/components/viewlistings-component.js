@@ -10,9 +10,11 @@ const Listing = props => (
     <td>{props.listing.amount}</td>
     <td>$
       {
-        Number(props.listing.item.cost) +
-        Number(props.listing.item.shippingcost) +
-        Number(props.listing.item.fees)
+        (Number(props.listing.item.cost) +
+          Number(props.listing.item.shippingcost) +
+          Number(props.listing.item.fees))
+        *
+        Number(props.listing.amount)
       }
     </td>
     <td>${props.listing.item.price}</td>
@@ -21,9 +23,11 @@ const Listing = props => (
         (Number(props.listing.amount) * Number(props.listing.item.price))
         -
         (
-          Number(props.listing.item.cost) +
-          Number(props.listing.item.shippingcost) +
-          Number(props.listing.item.fees)
+          (Number(props.listing.item.cost) +
+            Number(props.listing.item.shippingcost) +
+            Number(props.listing.item.fees))
+          *
+          Number(props.listing.amount)
         )
       }
     </td>
