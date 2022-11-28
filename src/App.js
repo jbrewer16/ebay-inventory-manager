@@ -11,16 +11,16 @@ import EditItem from './components/edititem-component';
 import EditListing from './components/editlisting-component';
 import ViewListings from './components/viewlistings-component';
 import ViewItem from './components/viewitem-component';
+import ViewAllItems from './components/viewallitems-component';
 
 function App() {
   return (
-    <div className="container">
       <Router>
-        <div className='container'>
           <Navbar />
           <Routes>
             <Route path="/" exact element={<Dashboard />} />
             <Route path="/listings" exact element={<ViewListings />} />
+            <Route path="/items" exact element={<ViewAllItems />} />
             <Route path="/user/create" exact element={<CreateUser />} />
             <Route path="/item/create" exact element={<CreateItem />} />
             <Route path="/item/:id" exact element={<ViewItem />} />
@@ -28,9 +28,7 @@ function App() {
             <Route path="/listing/create" exact element={<CreateListing />} />
             <Route path="/listing/edit/:id" exact element={<EditListing />} />
           </Routes>
-        </div>
       </Router>
-    </div>
   );
 }
 
