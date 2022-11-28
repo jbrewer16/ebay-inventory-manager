@@ -9,6 +9,7 @@ const listingSchema = new Schema({
     amount: { type: Number, required: true },
     finalprofit: { type: Number, required: true },
     listinglink: { type: String, required: true },
+    status: { type: String, required: true },
     dateadded: { type: Date, required: true },
     datesold: { type: Date, required: true },
 });
