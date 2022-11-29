@@ -84,7 +84,6 @@ export default class ViewListings extends Component {
 
   listingsList() {
     return this.state.listings.map(currentListing => {
-      console.log(currentListing);
       return <Listing
         listing={currentListing}
         deleteListing={this.deleteListing}
