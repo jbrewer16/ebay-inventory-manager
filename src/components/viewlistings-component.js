@@ -10,24 +10,29 @@ const Listing = props => (
     <td>{props.listing.amount}</td>
     <td>$
       {
-        Number(props.listing.item.cost) +
-        Number(props.listing.item.shippingcost) +
-        Number(props.listing.item.fees)
+        ((Number(props.listing.item.cost) +
+          Number(props.listing.item.shippingcost) +
+          Number(props.listing.item.fees))
+        *
+        Number(props.listing.amount)).toFixed(2)
       }
     </td>
     <td>${props.listing.item.price}</td>
     <td>$
       {
-        (Number(props.listing.amount) * Number(props.listing.item.price))
+        ((Number(props.listing.amount) * Number(props.listing.item.price))
         -
         (
-          Number(props.listing.item.cost) +
-          Number(props.listing.item.shippingcost) +
-          Number(props.listing.item.fees)
-        )
+          (Number(props.listing.item.cost) +
+            Number(props.listing.item.shippingcost) +
+            Number(props.listing.item.fees))
+          *
+          Number(props.listing.amount)
+        )).toFixed(2)
       }
     </td>
     <td><a href={props.listing.listinglink} target="_blank"><BsLink45Deg /></a></td>
+    <td>{props.listing.status}</td>
     <td>{props.listing.dateadded.substring(0, 10)}</td>
     <td>{props.listing.datesold.substring(0, 10)}</td>
     <td>
@@ -65,21 +70,8 @@ export default class ViewListings extends Component {
     });
   }
 
-  // getItem(itemnumber) {
-
-  //   return axios.get('http://localhost:5000/items')
-  //     .then(res => {
-  //       return res.data.find(item => item.itemnumber === itemnumber).itemname
-  //     })
-  //     .catch(err => console.log('Error: ' + err));
-
-  //   // return items.find(x => x.itemnumber === itemnumber).itemname
-
-  // }
-
   listingsList() {
     return this.state.listings.map(currentListing => {
-      console.log(currentListing);
       return <Listing
         listing={currentListing}
         deleteListing={this.deleteListing}
@@ -101,7 +93,8 @@ export default class ViewListings extends Component {
               <th>Total Costs</th>
               <th>Sale Price</th>
               <th>Final Profit</th>
-              <th>Listing Link</th>
+              <th>Link</th>
+              <th>Status</th>
               <th>Date Added</th>
               <th>Date Sold</th>
             </tr>

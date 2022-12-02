@@ -12,7 +12,7 @@ export default class CreateListing extends Component {
     this.onChangeItemNumber = this.onChangeItemNumber.bind(this);
     this.onChangeAmount = this.onChangeAmount.bind(this);
     this.onChangeFinalProfit = this.onChangeFinalProfit.bind(this);
-    this.onChangeListingkLink = this.onChangeListingkLink.bind(this);
+    this.onChangeListingLink = this.onChangeListingLink.bind(this);
     this.onChangeDateAdded = this.onChangeDateAdded.bind(this);
     this.onChangeDateSold = this.onChangeDateSold.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -23,6 +23,8 @@ export default class CreateListing extends Component {
       amount: 0,
       finalprofit: 0,
       listinglink: "",
+      //Status will always initially be "Listed"
+      status: "Listed",
       dateadded: new Date(),
       datesold: new Date(),
       item: {
@@ -94,7 +96,7 @@ export default class CreateListing extends Component {
     });
   }
 
-  onChangeListingkLink(e) {
+  onChangeListingLink(e) {
     this.setState({
       listinglink: e.target.value
     });
@@ -121,6 +123,7 @@ export default class CreateListing extends Component {
       amount: this.state.amount,
       finalprofit: this.state.finalprofit,
       listinglink: this.state.listinglink,
+      status: this.state.status,
       dateadded: this.state.dateadded,
       datesold: this.state.datesold
     }
@@ -187,7 +190,7 @@ export default class CreateListing extends Component {
             />
           </div>
           {/* Final Profit */}
-          <div className='form-group'>
+          {/* <div className='form-group'>
             <label>Final Profit: </label>
             <input type='text'
               required
@@ -195,7 +198,7 @@ export default class CreateListing extends Component {
               value={this.state.finalprofit}
               onChange={this.onChangeFinalProfit}
             />
-          </div>
+          </div> */}
           {/* Listing Link */}
           <div className='form-group'>
             <label>Listing Link: </label>
@@ -203,7 +206,7 @@ export default class CreateListing extends Component {
               required
               className='form-control'
               value={this.state.listinglink}
-              onChange={this.onChangeListingkLink}
+              onChange={this.onChangeListingLink}
             />
           </div>
           {/* Date Added */}

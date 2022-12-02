@@ -13,6 +13,7 @@ router.route('/add').post((req, res) => {
     const amount = Number(req.body.amount);
     const finalprofit = Number(req.body.finalprofit);
     const listinglink = req.body.listinglink;
+    const status = req.body.status;
     const dateadded = Date.parse(req.body.dateadded);
     const datesold = Date.parse(req.body.datesold);
 
@@ -22,6 +23,7 @@ router.route('/add').post((req, res) => {
         amount,
         finalprofit,
         listinglink,
+        status,
         dateadded,
         datesold,
     });
@@ -51,6 +53,7 @@ router.route('/update/:id').post((req, res) => {
             listing.amount = Number(req.body.amount);
             listing.finalprofit = Number(req.body.finalprofit);
             listing.listinglink = req.body.listinglink;
+            listing.status = req.body.status;
             listing.dateadded = Date.parse(req.body.dateadded);
             listing.datesold = Date.parse(req.body.datesold);
 
