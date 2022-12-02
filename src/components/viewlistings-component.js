@@ -10,17 +10,17 @@ const Listing = props => (
     <td>{props.listing.amount}</td>
     <td>$
       {
-        (Number(props.listing.item.cost) +
+        ((Number(props.listing.item.cost) +
           Number(props.listing.item.shippingcost) +
           Number(props.listing.item.fees))
         *
-        Number(props.listing.amount)
+        Number(props.listing.amount)).toFixed(2)
       }
     </td>
     <td>${props.listing.item.price}</td>
     <td>$
       {
-        (Number(props.listing.amount) * Number(props.listing.item.price))
+        ((Number(props.listing.amount) * Number(props.listing.item.price))
         -
         (
           (Number(props.listing.item.cost) +
@@ -28,7 +28,7 @@ const Listing = props => (
             Number(props.listing.item.fees))
           *
           Number(props.listing.amount)
-        )
+        )).toFixed(2)
       }
     </td>
     <td><a href={props.listing.listinglink} target="_blank"><BsLink45Deg /></a></td>
@@ -69,18 +69,6 @@ export default class ViewListings extends Component {
       listings: this.state.listings.filter(el => el._id !== id)
     });
   }
-
-  // getItem(itemnumber) {
-
-  //   return axios.get('http://localhost:5000/items')
-  //     .then(res => {
-  //       return res.data.find(item => item.itemnumber === itemnumber).itemname
-  //     })
-  //     .catch(err => console.log('Error: ' + err));
-
-  //   // return items.find(x => x.itemnumber === itemnumber).itemname
-
-  // }
 
   listingsList() {
     return this.state.listings.map(currentListing => {
