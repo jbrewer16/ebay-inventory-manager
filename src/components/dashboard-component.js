@@ -135,8 +135,8 @@ export default class Dashboard extends Component {
           break;
       }
 
-      var date = new Date(listing.dateadded);
-      if (date > timestamp && listing.status !== "Listed") {
+      var date = new Date(listing.datesold);
+      if (date >= timestamp && listing.status !== "Listed") {
         listingsInRange.push(listing);
       }
 
