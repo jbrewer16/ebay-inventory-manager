@@ -17,7 +17,6 @@ export default class EditListing extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: "",
       itemnumber: 0,
       amount: 0,
       finalprofit: 0,
@@ -44,7 +43,6 @@ export default class EditListing extends Component {
     axios.get('http://localhost:5000/listings/' + arr[arr.length - 1])
       .then(res => {
         this.setState({
-          username: res.data.username,
           itemnumber: res.data.itemnumber,
           amount: res.data.amount,
           finalprofit: res.data.finalprofit,
@@ -92,7 +90,6 @@ export default class EditListing extends Component {
     e.preventDefault();
 
     const listing = {
-      username: this.state.username,
       item: this.state.item,
       amount: this.state.amount,
       finalprofit: this.state.finalprofit,
