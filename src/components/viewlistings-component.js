@@ -36,7 +36,7 @@ const Listing = props => (
     <td>{props.listing.dateadded.substring(0, 10)}</td>
     <td>{props.listing.datesold.substring(0, 10)}</td>
     <td>
-      <Link to={'listings/edit/' + props.listing._id}><BsFillPencilFill /></Link>
+      <Link to={'/listing/edit/' + props.listing._id}><BsFillPencilFill /></Link>
       <a href='#' onClick={() => { props.deleteListing(props.listing._id) }}><BsFillTrashFill /></a>
     </td>
   </tr>

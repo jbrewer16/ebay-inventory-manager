@@ -8,7 +8,6 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const username = req.body.username;
     const item = req.body.item;
     const amount = Number(req.body.amount);
     const finalprofit = Number(req.body.finalprofit);
@@ -18,7 +17,6 @@ router.route('/add').post((req, res) => {
     const datesold = Date.parse(req.body.datesold);
 
     const newListing = new Listing({
-        username,
         item,
         amount,
         finalprofit,
@@ -48,7 +46,6 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Listing.findById(req.params.id)
         .then(listing => {
-            listing.username = req.body.username;
             listing.item = req.body.item;
             listing.amount = Number(req.body.amount);
             listing.finalprofit = Number(req.body.finalprofit);

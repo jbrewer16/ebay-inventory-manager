@@ -75,12 +75,22 @@ export default class Dashboard extends Component {
   }
 
   getInventoryCount() {
-    return this.state.listings.reduce((count, listing) => count = count + Number(listing.amount), 0)
+    return this.state.listings.reduce((count, listing) => {
+      if(listing.status === "Listed") {
+        return count = count + Number(listing.amount);
+      } else {
+        return count;
+      }
+    }, 0)
   }
 
   getInventoryPriceSummary() {
     return (this.state.listings.reduce((sum, listing) => {
-      return sum + (Number(listing.amount) * Number(listing.item.price))
+      if(listing.status === "Listed") {
+        return sum + (Number(listing.amount) * Number(listing.item.price))
+      } else {
+        return sum;
+      }
     }, 0));
   }
 
@@ -135,8 +145,8 @@ export default class Dashboard extends Component {
           break;
       }
 
-      var date = new Date(listing.dateadded);
-      if (date > timestamp && listing.status !== "Listed") {
+      var date = new Date(listing.datesold);
+      if (date >= timestamp && listing.status !== "Listed") {
         listingsInRange.push(listing);
       }
 

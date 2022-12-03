@@ -4,7 +4,6 @@ const Item = require('./item-model');
 const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
-    username: { type: String, required: true },
     item: { type: Object, required: true },
     amount: { type: Number, required: true },
     finalprofit: { type: Number, required: true },

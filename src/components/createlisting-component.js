@@ -7,7 +7,6 @@ export default class CreateListing extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeItem = this.onChangeItem.bind(this);
     this.onChangeItemNumber = this.onChangeItemNumber.bind(this);
     this.onChangeAmount = this.onChangeAmount.bind(this);
@@ -18,7 +17,6 @@ export default class CreateListing extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: "",
       itemnumber: 0,
       amount: 0,
       finalprofit: 0,
@@ -44,15 +42,6 @@ export default class CreateListing extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.username),
-            username: response.data[0].username
-          }); 
-        }
-      });
     axios.get('http://localhost:5000/items/')
       .then(response => {
         if (response.data.length > 0) {
@@ -63,12 +52,6 @@ export default class CreateListing extends Component {
           });
         }
       });
-  }
-
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
   }
 
   onChangeItem(e) {
@@ -118,7 +101,6 @@ export default class CreateListing extends Component {
     e.preventDefault();
 
     const listing = {
-      username: this.state.username,
       item: this.state.item,
       amount: this.state.amount,
       finalprofit: this.state.finalprofit,
@@ -143,24 +125,6 @@ export default class CreateListing extends Component {
       <div>
         <h3>Create New Listing</h3>
         <form onSubmit={this.onSubmit}>
-          {/* Username */}
-          <div className='form-group'>
-            <label>Username: </label>
-            <select ref='userInput'
-              required
-              className='form-control'
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function (user) {
-                  return <option
-                    key={user}
-                    value={user}>{user}
-                  </option>
-                })
-              }
-            </select>
-          </div>
           {/* Item Number */}
           <div className='form-group'>
             <label>Item Number: </label>
