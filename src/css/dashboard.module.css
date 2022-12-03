@@ -1,0 +1,54 @@
+.card {
+    width: 185px;
+    height: 185px;
+    margin-top: 10px;
+    margin-right: 60px;
+}
+
+.date-range-rev {
+    width: 225px;
+    margin-top: 0px;
+    margin-right: 10px;
+}
+
+.date-range-ct {
+    text-align: left; 
+    padding-top: 5px;
+}
+
+.card-title {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+}
+
+.card-text {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.inv-sum-c {
+    margin-top: 80px;
+    margin-left: 50px;
+}
+
+.inv-sum-r {
+    width: 300px; 
+    text-align: center;
+}
+
+.inv-sum-p {
+    border-style: solid;
+}
+
+th {
+    border: 2px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td {
+    border: 1px solid black;
+    padding-left: 10px;
+}

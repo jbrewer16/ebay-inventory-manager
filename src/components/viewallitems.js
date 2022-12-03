@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import '../css/viewallitems.css'
 
 const Card = props => (
     <div

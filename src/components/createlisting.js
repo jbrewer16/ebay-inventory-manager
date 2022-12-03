@@ -153,16 +153,6 @@ export default class CreateListing extends Component {
               onChange={this.onChangeAmount}
             />
           </div>
-          {/* Final Profit */}
-          {/* <div className='form-group'>
-            <label>Final Profit: </label>
-            <input type='text'
-              required
-              className='form-control'
-              value={this.state.finalprofit}
-              onChange={this.onChangeFinalProfit}
-            />
-          </div> */}
           {/* Listing Link */}
           <div className='form-group'>
             <label>Listing Link: </label>
@@ -201,3 +191,4 @@ export default class CreateListing extends Component {
     )
   }
 }
+  

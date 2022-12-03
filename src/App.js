@@ -2,15 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import Navbar from './components/navbar-component';
-import CreateItem from './components/createitem-component';
-import CreateListing from './components/createlisting-component';
-import Dashboard from './components/dashboard-component';
-import EditItem from './components/edititem-component';
-import EditListing from './components/editlisting-component';
-import ViewListings from './components/viewlistings-component';
-import ViewItem from './components/viewitem-component';
-import ViewAllItems from './components/viewallitems-component';
+import Navbar from './components/navbar';
+import CreateItem from './components/createitem';
+import CreateListing from './components/createlisting';
+import Dashboard from './components/dashboard';
+import EditItem from './components/edititem';
+import EditListing from './components/editlisting';
+import ViewListings from './components/viewlistings';
+import ViewItem from './components/viewitem';
+import ViewAllItems from './components/viewallitems';
 
 function App() {
   return (
