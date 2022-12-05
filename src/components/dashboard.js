@@ -174,9 +174,9 @@ export default class Dashboard extends Component {
       <div className="container">
         <div className="row">
           {/* To be packed card */}
-          <div className="card">
+          <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className="card-title">
+              <div className={`card-title ${styles["card-title"]}`}>
                 {this.state.toBePacked}
               </div>
               <div className="card-text">
@@ -185,9 +185,9 @@ export default class Dashboard extends Component {
             </div>
           </div>
           {/* To be shipped card */}
-          <div className="card">
+          <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className="card-title">
+              <div className={`card-title ${styles["card-title"]}`}>
                 {this.state.toBeShipped}
               </div>
               <div className="card-text">
@@ -196,9 +196,9 @@ export default class Dashboard extends Component {
             </div>
           </div>
           {/* To be delivered card */}
-          <div className="card">
+          <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className="card-title">
+              <div className={`card-title ${styles["card-title"]}`}>
                 {this.state.toBeDelivered}
               </div>
               <div className="card-text">
@@ -206,15 +206,15 @@ export default class Dashboard extends Component {
               </div>
             </div>
           </div>
-          <div className="col inv-sum-c">
-            <div className="row inv-sum-r">
+          <div className={`col ${styles["inv-sum-c"]}`}>
+            <div className={`row ${styles["inv-sum-r"]}`}>
               <p>Inventory Summary</p>
             </div>
-            <div className="row inv-sum-r">
-              <p className="inv-sum-p">Number of items: {this.getInventoryCount()}</p>
+            <div className={`row ${styles["inv-sum-r"]}`}>
+              <p className={styles["inv-sum-p"]}>Number of items: {this.getInventoryCount()}</p>
             </div>
-            <div className="row inv-sum-r">
-              <p className="inv-sum-p">Price of items: ${this.getInventoryPriceSummary()}</p>
+            <div className={`row ${styles["inv-sum-r"]}`}>
+              <p className={styles["inv-sum-p"]}>Price of items: ${this.getInventoryPriceSummary()}</p>
             </div>
           </div>
         </div>
@@ -233,18 +233,18 @@ export default class Dashboard extends Component {
               </select>
               days
             </p>
-            <div className="card date-range-rev">
+            <div className={`${styles["date-range-rev"]} card`}>
               <div className="card-body">
-                <div className="date-range-ct">
+                <div className={`${styles["date-range-ct"]}`}>
                   Number of items: {this.getSalesDetails()[0]}
                 </div>
-                <div className="date-range-ct">
+                <div className={`${styles["date-range-ct"]}`}>
                   Total Revenue: ${this.getSalesDetails()[1].toFixed(2)}
                 </div>
-                <div className="date-range-ct">
+                <div className={`${styles["date-range-ct"]}`}>
                   Total Costs: ${this.getSalesDetails()[2].toFixed(2)}
                 </div>
-                <div className="date-range-ct">
+                <div className={`${styles["date-range-ct"]}`}>
                   Profit: ${this.getSalesDetails()[3].toFixed(2)}
                 </div>
               </div>
