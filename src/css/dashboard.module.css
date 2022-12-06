@@ -22,6 +22,27 @@
     font-size: 48px;
 }
 
+.card-title-pack {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+    color: #0062ff;
+}
+
+.card-title-ship {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+    color: #ff5100;
+}
+
+.card-title-del {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+    color: #108700;
+}
+
 .card-text {
     text-align: center;
     padding-top: 20px;
@@ -39,16 +60,16 @@
 }
 
 .inv-sum-p {
+    background-color: #ffffff;
     border-style: solid;
+    border-width: 1px;
 }
 
-th {
-    border: 2px solid black;
-    padding-left: 10px;
-    padding-right: 10px;
+.dash-table {
+    background-color: white;
+    border-radius: 5px;
 }
 
-td {
-    border: 1px solid black;
-    padding-left: 10px;
+.dash-table-head > tr > th {
+    font-weight: 500;
 }

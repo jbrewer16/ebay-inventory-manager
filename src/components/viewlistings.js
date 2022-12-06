@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BsFillTrashFill, BsFillPencilFill, BsLink45Deg } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import styles from '../css/viewlistings.module.css'
 
 const Listing = props => (
   <tr>
@@ -84,8 +85,8 @@ export default class ViewListings extends Component {
     return (
       <div>
         <h3>Listings</h3>
-        <table className='table'>
-          <thead className='thead-light'>
+        <table className={`table table-hover ${styles['listing-table']}`}>
+          <thead className={`${styles["listing-table-head"]}`}>
             <tr>
               <th>Item Name</th>
               <th>Category</th>

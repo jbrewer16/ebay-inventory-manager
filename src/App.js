@@ -13,6 +13,9 @@ import ViewItem from './components/viewitem';
 import ViewAllItems from './components/viewallitems';
 
 function App() {
+
+  document.body.style.backgroundColor = "#F0F0F0"
+
   return (
       <Router>
           <Navbar />

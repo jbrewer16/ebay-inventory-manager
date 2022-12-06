@@ -176,7 +176,7 @@ export default class Dashboard extends Component {
           {/* To be packed card */}
           <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className={`card-title ${styles["card-title"]}`}>
+              <div className={`card-title ${styles["card-title-pack"]}`}>
                 {this.state.toBePacked}
               </div>
               <div className={`card-text ${styles["card-text"]}`}>
@@ -187,7 +187,7 @@ export default class Dashboard extends Component {
           {/* To be shipped card */}
           <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className={`card-title ${styles["card-title"]}`}>
+              <div className={`card-title ${styles["card-title-ship"]}`}>
                 {this.state.toBeShipped}
               </div>
               <div className={`card-text ${styles["card-text"]}`}>
@@ -198,7 +198,7 @@ export default class Dashboard extends Component {
           {/* To be delivered card */}
           <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className={`card-title ${styles["card-title"]}`}>
+              <div className={`card-title ${styles["card-title-del"]}`}>
                 {this.state.toBeDelivered}
               </div>
               <div className={`card-text ${styles["card-text"]}`}>
@@ -254,8 +254,8 @@ export default class Dashboard extends Component {
             <p>
               Order details last {this.state.dateRange} days
             </p>
-            <table>
-              <thead>
+            <table className={`table ${styles["dash-table"]}`}>
+              <thead className={`${styles["dash-table-head"]}`}>
                 <tr>
                   <th>Item #</th>
                   <th>Item Name</th>
