@@ -179,7 +179,7 @@ export default class Dashboard extends Component {
               <div className={`card-title ${styles["card-title"]}`}>
                 {this.state.toBePacked}
               </div>
-              <div className="card-text">
+              <div className={`card-text ${styles["card-text"]}`}>
                 To be packed
               </div>
             </div>
@@ -190,7 +190,7 @@ export default class Dashboard extends Component {
               <div className={`card-title ${styles["card-title"]}`}>
                 {this.state.toBeShipped}
               </div>
-              <div className="card-text">
+              <div className={`card-text ${styles["card-text"]}`}>
                 To be shipped
               </div>
             </div>
@@ -201,7 +201,7 @@ export default class Dashboard extends Component {
               <div className={`card-title ${styles["card-title"]}`}>
                 {this.state.toBeDelivered}
               </div>
-              <div className="card-text">
+              <div className={`card-text ${styles["card-text"]}`}>
                 To be delivered
               </div>
             </div>
