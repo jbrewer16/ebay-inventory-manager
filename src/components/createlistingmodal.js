@@ -24,8 +24,8 @@ export default class CreateListingModal extends Component {
             originalAmount: 0,
             amountLeft: 0,
             listinglink: "",
-            //Status will always initially be "Listed", "Complete" when all items are sold
-            status: "Listed",
+            //Status will always initially be "Open", "Complete" when all items are sold
+            status: "Open",
             //Doing just "new Date()" causes the date to be set one day ahead, my best
             //guess is it's a timezone issue, setting the hours to 0 seems to fix it
             dateadded: new Date(new Date().setHours(0,0,0,0)),

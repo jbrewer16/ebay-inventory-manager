@@ -143,10 +143,8 @@ export default class ViewListings extends Component {
               onChange={this.onChangeStatusSort}
             >
               <option value="All">All</option>
-              <option value="Sold">Sold</option>
-              <option value="Packed">Packed</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Delivered">Delivered</option>
+              <option value="Open">Open</option>
+              <option value="Complete">Complete</option>
             </select>
           </div>
           <div className='col-3' style={{ marginTop: '8px' }}>

@@ -22,7 +22,7 @@ export default class EditListing extends Component {
       amountLeft: 0,
       // finalprofit: 0,
       listinglink: "",
-      status: "Listed",
+      status: "Open",
       dateadded: new Date(),
       item: {
         itemnumber: 0,
@@ -166,7 +166,7 @@ export default class EditListing extends Component {
                   style={{ marginLeft: '10px' }}
                   value={this.state.status}
                   onChange={this.onChangeStatus}>
-                  <option value='Listed'>Listed</option>
+                  <option value='Open'>Open</option>
                   <option value='Complete'>Complete</option>
                 </select>
               </div>
