@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import Navbar from './components/navbar';
-import CreateItem from './components/createitem';
-import CreateListing from './components/createlisting';
 import Dashboard from './components/dashboard';
 import EditItem from './components/edititem';
 import EditListing from './components/editlisting';
@@ -23,10 +21,8 @@ function App() {
             <Route path="/" exact element={<Dashboard />} />
             <Route path="/listings" exact element={<ViewListings />} />
             <Route path="/items" exact element={<ViewAllItems />} />
-            <Route path="/item/create" exact element={<CreateItem />} />
             <Route path="/item/:id" exact element={<ViewItem />} />
             <Route path="/item/edit/:id" exact element={<EditItem />} />
-            <Route path="/listing/create" exact element={<CreateListing />} />
             <Route path="/listing/edit/:id" exact element={<EditListing />} />
           </Routes>
       </Router>
