@@ -20,7 +20,7 @@ export default class CreateItemModal extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            itemnumber: 0,
+            itemnumber: 100,
             itemname: "",
             category: "",
             price: 0,

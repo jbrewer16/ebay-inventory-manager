@@ -134,7 +134,7 @@ export default class CreateListingModal extends Component {
                                 value={this.state.itemnumber}
                                 onChange={this.onChangeItem}>
                                 {
-                                    this.state.items.map(function (item) {
+                                    [...this.state.items].reverse().map(function (item) {
                                         return <option
                                             key={item.itemnumber}
                                             value={JSON.stringify(item)}>{item.itemnumber} - {item.itemname}
