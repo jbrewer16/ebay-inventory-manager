@@ -23,7 +23,7 @@ const Listing = props => (
           Number(props.listing.originalAmount)).toFixed(2)
       }
     </td>
-    <td>${Number(props.listing.originalAmount) * Number(props.listing.item.price)}</td>
+    <td>${(Number(props.listing.originalAmount) * Number(props.listing.item.price)).toFixed(2)}</td>
     <td>$
       {
         ((Number(props.listing.originalAmount) * Number(props.listing.item.price))

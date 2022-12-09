@@ -90,7 +90,7 @@ export default class Dashboard extends Component {
 
   getInventoryCount() {
     return this.state.listings.reduce((count, listing) => {
-      if (listing.status === "Listed") {
+      if (listing.status === "Open") {
         return count = count + Number(listing.amountLeft);
       } else {
         return count;
@@ -100,7 +100,7 @@ export default class Dashboard extends Component {
 
   getInventoryPriceSummary() {
     return (this.state.listings.reduce((sum, listing) => {
-      if (listing.status === "Listed") {
+      if (listing.status === "Open") {
         return sum + (Number(listing.amountLeft) * Number(listing.item.price))
       } else {
         return sum;
@@ -160,7 +160,7 @@ export default class Dashboard extends Component {
       }
 
       var date = new Date(order.datesold);
-      if (date >= timestamp && order.status !== "Listed") {
+      if (date >= timestamp && order.status !== "Open") {
         ordersInRange.push(order);
       }
 
@@ -228,7 +228,7 @@ export default class Dashboard extends Component {
               <p className={styles["inv-sum-p"]}>Number of items: {this.getInventoryCount()}</p>
             </div>
             <div className={`row ${styles["inv-sum-r"]}`}>
-              <p className={styles["inv-sum-p"]}>Price of items: ${this.getInventoryPriceSummary()}</p>
+              <p className={styles["inv-sum-p"]}>Price of items: ${(this.getInventoryPriceSummary()).toFixed(2)}</p>
             </div>
           </div>
         </div>

@@ -52,8 +52,8 @@ export default class CreateListingModal extends Component {
                 if (response.data.length > 0) {
                     this.setState({
                         items: response.data.map(item => item),
-                        itemnumber: response.data[0].itemnumber,
-                        item: response.data[0]
+                        itemnumber: response.data[response.data.length - 1].itemnumber,
+                        item: response.data[response.data.length - 1]
                     });
                 }
             });
