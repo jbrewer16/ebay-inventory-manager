@@ -1,37 +1,42 @@
 import axios from 'axios';
-import React, { Component } from 'react'
-import styles from '../css/dashboard.module.css'
+import React, { Component } from 'react';
+import styles from '../css/dashboard.module.css';
+import { BsFillTrashFill, BsFillPencilFill, BsLink45Deg, BsCalendar3 } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 const Order = props => (
   <tr>
-    <td>{props.listing.item.itemnumber}</td>
-    <td>{props.listing.item.itemname}</td>
-    <td>{props.listing.amount}</td>
-    <td>${(props.listing.item.price * props.listing.amount).toFixed(2)}</td>
+    <td>{props.order.listing.item.itemnumber}</td>
+    <td>{props.order.listing.item.itemname}</td>
+    <td>{props.order.amountOrdered}</td>
+    <td>${(props.order.listing.item.price * props.order.amountOrdered).toFixed(2)}</td>
     <td>$
       {
-        ((Number(props.listing.item.cost) +
-          Number(props.listing.item.shippingcost) +
-          Number(props.listing.item.fees))
+        ((Number(props.order.listing.item.cost) +
+          Number(props.order.listing.item.shippingcost) +
+          Number(props.order.listing.item.fees))
           *
-          Number(props.listing.amount)).toFixed(2)
+          Number(props.order.amountOrdered)).toFixed(2)
       }
     </td>
     <td>$
       {
-        ((Number(props.listing.amount) * Number(props.listing.item.price))
+        ((Number(props.order.amountOrdered) * Number(props.order.listing.item.price))
           -
           (
-            (Number(props.listing.item.cost) +
-              Number(props.listing.item.shippingcost) +
-              Number(props.listing.item.fees))
+            (Number(props.order.listing.item.cost) +
+              Number(props.order.listing.item.shippingcost) +
+              Number(props.order.listing.item.fees))
             *
-            Number(props.listing.amount)
+            Number(props.order.amountOrdered)
           )).toFixed(2)
       }
     </td>
-    <td>{props.listing.status}</td>
-    <td>{props.listing.datesold.substring(0, 10)}</td>
+    <td>{props.order.status}</td>
+    <td>{props.order.datesold.substring(0, 10)}</td>
+    <td>
+      <Link to={'/order/edit/' + props.order._id}><BsFillPencilFill /></Link>
+    </td>
   </tr>
 )
 
@@ -44,6 +49,7 @@ export default class Dashboard extends Component {
 
     this.state = {
       listings: [],
+      orders: [],
       items: [],
       salesWithinDate: [],
       toBePacked: 0,
@@ -63,6 +69,14 @@ export default class Dashboard extends Component {
       })
       .catch(err => console.log('Error: ' + err));
 
+    await axios.get('http://localhost:5000/orders/')
+      .then(res => {
+        this.setState({
+          orders: res.data
+        });
+      })
+      .catch(err => console.log('Error: ' + err));
+
     await axios.get('http://localhost:5000/items/')
       .then(res => {
         this.setState({
@@ -71,13 +85,13 @@ export default class Dashboard extends Component {
       })
       .catch(err => console.log('Error: ' + err));
 
-    this.getListingStatus()
+    this.getOrdersStatus()
   }
 
   getInventoryCount() {
     return this.state.listings.reduce((count, listing) => {
       if (listing.status === "Listed") {
-        return count = count + Number(listing.amount);
+        return count = count + Number(listing.amountLeft);
       } else {
         return count;
       }
@@ -87,7 +101,7 @@ export default class Dashboard extends Component {
   getInventoryPriceSummary() {
     return (this.state.listings.reduce((sum, listing) => {
       if (listing.status === "Listed") {
-        return sum + (Number(listing.amount) * Number(listing.item.price))
+        return sum + (Number(listing.amountLeft) * Number(listing.item.price))
       } else {
         return sum;
       }
@@ -95,21 +109,21 @@ export default class Dashboard extends Component {
   }
 
   ordersList() {
-    return this.state.salesWithinDate.map(currentListing => {
+    return this.state.salesWithinDate.map(currentOrder => {
       return <Order
-        listing={currentListing}
-        key={currentListing._id}
+        order={currentOrder}
+        key={currentOrder._id}
       />;
     })
   }
 
   getSalesDetails() {
-    const { count, revenue, costs, profit } = this.state.salesWithinDate.reduce((res, listing) => {
-      var itemCost = Number(listing.item.cost);
-      var shippingCost = Number(listing.item.shippingcost);
-      var fees = Number(listing.item.fees);
-      var amount = Number(listing.amount);
-      var price = Number(listing.item.price);
+    const { count, revenue, costs, profit } = this.state.salesWithinDate.reduce((res, order) => {
+      var itemCost = Number(order.listing.item.cost);
+      var shippingCost = Number(order.listing.item.shippingcost);
+      var fees = Number(order.listing.item.fees);
+      var amount = Number(order.amountOrdered);
+      var price = Number(order.listing.item.price);
 
       res.count = res.count + amount;
       res.revenue = res.revenue + (amount * price);
@@ -122,18 +136,18 @@ export default class Dashboard extends Component {
     return [count, revenue, costs, profit];
   }
 
-  getListingStatus() {
+  getOrdersStatus() {
 
     var toBePackedC = 0;
     var toBeShippedC = 0;
     var toBeDeliveredC = 0;
 
-    var listingsInRange = [];
+    var ordersInRange = [];
 
     var timestamp = new Date().getTime() - (this.state.dateRange * 24 * 60 * 60 * 1000);
 
-    this.state.listings.forEach(listing => {
-      switch (listing.status) {
+    this.state.orders.forEach(order => {
+      switch (order.status) {
         case 'Sold':
           toBePackedC++;
           break;
@@ -145,15 +159,15 @@ export default class Dashboard extends Component {
           break;
       }
 
-      var date = new Date(listing.datesold);
-      if (date >= timestamp && listing.status !== "Listed") {
-        listingsInRange.push(listing);
+      var date = new Date(order.datesold);
+      if (date >= timestamp && order.status !== "Listed") {
+        ordersInRange.push(order);
       }
 
     });
 
     this.setState({
-      salesWithinDate: listingsInRange,
+      salesWithinDate: ordersInRange,
       toBePacked: toBePackedC,
       toBeShipped: toBeShippedC,
       toBeDelivered: toBeDeliveredC
@@ -164,7 +178,7 @@ export default class Dashboard extends Component {
 
   onChangeDateRange(e) {
     this.setState({ dateRange: e.target.value }, () => {
-      this.getListingStatus()
+      this.getOrdersStatus()
     });
 
   }

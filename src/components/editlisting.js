@@ -9,21 +9,21 @@ export default class EditListing extends Component {
 
     super(props);
 
-    this.onChangeAmount = this.onChangeAmount.bind(this);
+    this.onChangeOriginalAmount = this.onChangeOriginalAmount.bind(this);
+    this.onChangeAmountLeft = this.onChangeAmountLeft.bind(this);
     this.onChangeStatus = this.onChangeStatus.bind(this);
     this.onChangeListingLink = this.onChangeListingLink.bind(this);
     this.onChangeDateAdded = this.onChangeDateAdded.bind(this);
-    this.onChangeDateSold = this.onChangeDateSold.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       itemnumber: 0,
-      amount: 0,
-      finalprofit: 0,
+      originalAmount: 0,
+      amountLeft: 0,
+      // finalprofit: 0,
       listinglink: "",
-      status: "Listed",
+      status: "Open",
       dateadded: new Date(),
-      datesold: new Date(),
       item: {
         itemnumber: 0,
         itemname: "",
@@ -44,21 +44,27 @@ export default class EditListing extends Component {
       .then(res => {
         this.setState({
           itemnumber: res.data.itemnumber,
-          amount: res.data.amount,
-          finalprofit: res.data.finalprofit,
+          originalAmount: res.data.originalAmount,
+          amountLeft: res.data.amountLeft,
+          // finalprofit: res.data.finalprofit,
           listinglink: res.data.listinglink,
           status: res.data.status,
           dateadded: new Date(res.data.dateadded),
-          datesold: new Date(res.data.datesold),
           item: res.data.item
         });
       })
       .catch(err => console.log('Error: ' + err));
   }
 
-  onChangeAmount(e) {
+  onChangeOriginalAmount(e) {
     this.setState({
-      amount: e.target.value
+      originalAmount: e.target.value
+    });
+  }
+
+  onChangeAmountLeft(e) {
+    this.setState({
+      amountLeft: e.target.value
     });
   }
 
@@ -80,23 +86,17 @@ export default class EditListing extends Component {
     });
   }
 
-  onChangeDateSold(d) {
-    this.setState({
-      datesold: d
-    });
-  }
-
   onSubmit(e) {
     e.preventDefault();
 
     const listing = {
       item: this.state.item,
-      amount: this.state.amount,
-      finalprofit: this.state.finalprofit,
+      originalAmount: this.state.originalAmount,
+      amountLeft: this.state.amountLeft,
+      // finalprofit: this.state.finalprofit,
       listinglink: this.state.listinglink,
       status: this.state.status,
-      dateadded: this.state.dateadded,
-      datesold: this.state.datesold
+      dateadded: this.state.dateadded
     }
 
     console.log(listing);
@@ -112,68 +112,85 @@ export default class EditListing extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Edit Listing</h3>
-        <p>{this.state.item.itemnumber} - {this.state.item.itemname}</p>
-        <form onSubmit={this.onSubmit}>
-          {/* Amount */}
-          <div className='form-group'>
-            <label>Amount: </label>
-            <input type='text'
-              required
-              className='form-control'
-              value={this.state.amount}
-              onChange={this.onChangeAmount}
-            />
-          </div>
-          {/* Listing Link */}
-          <div className='form-group'>
-            <label>Listing Link: </label>
-            <input type='text'
-              required
-              className='form-control'
-              value={this.state.listinglink}
-              onChange={this.onChangeListingLink}
-            />
-          </div>
-          {/* Status */}
-          <div className='form-group'>
-            <label>Status: </label>
-            <select
-              name='status'
-              value={this.state.status}
-              onChange={this.onChangeStatus}>
-              <option value='Listed'>Listed</option>
-              <option value='Sold'>Sold</option>
-              <option value='Packed'>Packed</option>
-              <option value='Shipped'>Shipped</option>
-              <option value='Delivered'>Delivered</option>
-            </select>
-          </div>
-          {/* Date Added */}
-          <div className='form-group'>
-            <label>Date Added: </label>
-            <div>
-              <DatePicker
-                selected={this.state.dateadded}
-                onChange={this.onChangeDateAdded}
-              />
+      <div className='container-sm'>
+        <div className='row' style={{ paddingTop: '40px', width: '25%', margin: 'auto' }}>
+          <h3>Edit Listing</h3>
+        </div>
+        <div className='row' style={{ paddingTop: '10px', width: '25%', margin: 'auto' }}>
+          <p>{this.state.item.itemnumber} - {this.state.item.itemname}</p>
+        </div>
+        <div className='row'>
+          <form onSubmit={this.onSubmit}>
+            <div className='row' style={{ paddingTop: '10px', width: '25%', margin: 'auto' }}>
+              {/* Amount */}
+              <div className='form-group'>
+                <label>Original Amount: </label>
+                <input type='text'
+                  required
+                  className='form-control'
+                  value={this.state.originalAmount}
+                  onChange={this.onChangeOriginalAmount}
+                />
+              </div>
             </div>
-          </div>
-          {/* Date Sold */}
-          <div className='form-group'>
-            <label>Date Sold: </label>
-            <div>
-              <DatePicker
-                selected={this.state.datesold}
-                onChange={this.onChangeDateSold}
-              />
+            <div className='row' style={{ paddingTop: '10px', width: '25%', margin: 'auto' }}>
+              {/* Amount */}
+              <div className='form-group'>
+                <label>Amount Left: </label>
+                <input type='text'
+                  required
+                  className='form-control'
+                  value={this.state.amountLeft}
+                  onChange={this.onChangeAmountLeft}
+                />
+              </div>
             </div>
-          </div>
-          <div className='form-group'>
-            <input type='submit' value='Edit Listing' className='btn btn-primary' />
-          </div>
-        </form>
+            <div className='row' style={{ paddingTop: '10px', width: '25%', margin: 'auto' }}>
+              {/* Listing Link */}
+              <div className='form-group'>
+                <label>Listing Link: </label>
+                <input type='text'
+                  required
+                  className='form-control'
+                  value={this.state.listinglink}
+                  onChange={this.onChangeListingLink}
+                />
+              </div>
+            </div>
+            <div className='row' style={{ paddingTop: '10px', width: '25%', margin: 'auto' }}>
+              {/* Status */}
+              <div className='form-group'>
+                <label>Status: </label>
+                <select
+                  name='status'
+                  style={{ marginLeft: '10px' }}
+                  value={this.state.status}
+                  onChange={this.onChangeStatus}>
+                  <option value='Open'>Open</option>
+                  <option value='Complete'>Complete</option>
+                </select>
+              </div>
+            </div>
+            <div className='row' style={{ paddingTop: '10px', width: '25%', margin: 'auto' }}>
+              {/* Date Added */}
+              <div className='form-group'>
+                <label>Date Added: </label>
+                <div>
+                  <DatePicker
+                    selected={this.state.dateadded}
+                    onChange={this.onChangeDateAdded}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='row' style={{ paddingTop: '10px', width: '25%', margin: 'auto' }}>
+              <div className='form-group'>
+                <input type='submit' value='Edit Listing' className='btn btn-primary' />
+              </div>
+            </div>
+          </form>
+        </div>
+
       </div>
     )
   }

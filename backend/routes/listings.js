@@ -9,21 +9,19 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
     const item = req.body.item;
-    const amount = Number(req.body.amount);
-    const finalprofit = Number(req.body.finalprofit);
+    const originalAmount = Number(req.body.originalAmount);
+    const amountLeft = Number(req.body.amountLeft);
     const listinglink = req.body.listinglink;
     const status = req.body.status;
     const dateadded = Date.parse(req.body.dateadded);
-    const datesold = Date.parse(req.body.datesold);
 
     const newListing = new Listing({
         item,
-        amount,
-        finalprofit,
+        originalAmount,
+        amountLeft,
         listinglink,
         status,
         dateadded,
-        datesold,
     });
 
     newListing.save()
@@ -47,12 +45,11 @@ router.route('/update/:id').post((req, res) => {
     Listing.findById(req.params.id)
         .then(listing => {
             listing.item = req.body.item;
-            listing.amount = Number(req.body.amount);
-            listing.finalprofit = Number(req.body.finalprofit);
+            listing.originalAmount = Number(req.body.originalAmount);
+            listing.amountLeft = Number(req.body.amountLeft);
             listing.listinglink = req.body.listinglink;
             listing.status = req.body.status;
             listing.dateadded = Date.parse(req.body.dateadded);
-            listing.datesold = Date.parse(req.body.datesold);
 
             listing.save()
                 .then(() => res.json('Listing updated!'))
