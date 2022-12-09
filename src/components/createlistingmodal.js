@@ -28,8 +28,10 @@ export default class CreateListingModal extends Component {
             listinglink: "",
             //Status will always initially be "Listed"
             status: "Listed",
-            dateadded: new Date(),
-            datesold: new Date(),
+            //Doing just "new Date()" causes the date to be set one day ahead, my best
+            //guess is it's a timezone issue, setting the hours to 0 seems to fix it
+            dateadded: new Date(new Date().setHours(0,0,0,0)),
+            datesold: new Date(new Date().setHours(0,0,0,0)),
             item: {
                 itemnumber: 0,
                 itemname: "",
@@ -115,8 +117,6 @@ export default class CreateListingModal extends Component {
             dateadded: this.state.dateadded,
             datesold: this.state.datesold
         }
-
-        console.log(listing);
 
         axios.post('http://localhost:5000/listings/add', listing)
             .then(res => console.log(res.data))
