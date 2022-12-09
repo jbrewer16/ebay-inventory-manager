@@ -9,6 +9,8 @@ import EditListing from './components/editlisting';
 import ViewListings from './components/viewlistings';
 import ViewItem from './components/viewitem';
 import ViewAllItems from './components/viewallitems';
+import CreateOrder from './components/createordermodal';
+import EditOrder from './components/editorder';
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
             <Route path="/item/:id" exact element={<ViewItem />} />
             <Route path="/item/edit/:id" exact element={<EditItem />} />
             <Route path="/listing/edit/:id" exact element={<EditListing />} />
+            {/* <Route path="/order/create" exact element={<CreateOrder />} /> */}
+            <Route path="/order/edit/:id" exact element={<EditOrder />} />
           </Routes>
       </Router>
   );

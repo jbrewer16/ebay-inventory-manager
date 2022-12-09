@@ -14,24 +14,21 @@ export default class CreateListingModal extends Component {
         this.onChangeItem = this.onChangeItem.bind(this);
         this.onChangeItemNumber = this.onChangeItemNumber.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
-        this.onChangeFinalProfit = this.onChangeFinalProfit.bind(this);
         this.onChangeListingLink = this.onChangeListingLink.bind(this);
         this.onChangeDateAdded = this.onChangeDateAdded.bind(this);
-        this.onChangeDateSold = this.onChangeDateSold.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             show: props.show,
             itemnumber: 0,
-            amount: 0,
-            finalprofit: 0,
+            originalAmount: 0,
+            amountLeft: 0,
             listinglink: "",
-            //Status will always initially be "Listed"
+            //Status will always initially be "Listed", "Complete" when all items are sold
             status: "Listed",
             //Doing just "new Date()" causes the date to be set one day ahead, my best
             //guess is it's a timezone issue, setting the hours to 0 seems to fix it
             dateadded: new Date(new Date().setHours(0,0,0,0)),
-            datesold: new Date(new Date().setHours(0,0,0,0)),
             item: {
                 itemnumber: 0,
                 itemname: "",
@@ -77,7 +74,8 @@ export default class CreateListingModal extends Component {
 
     onChangeAmount(e) {
         this.setState({
-            amount: e.target.value
+            originalAmount: e.target.value,
+            amountLeft: e.target.value
         });
     }
 
@@ -99,23 +97,16 @@ export default class CreateListingModal extends Component {
         });
     }
 
-    onChangeDateSold(d) {
-        this.setState({
-            datesold: d
-        });
-    }
-
     onSubmit(e) {
         e.preventDefault();
 
         const listing = {
             item: this.state.item,
-            amount: this.state.amount,
-            finalprofit: this.state.finalprofit,
+            originalAmount: this.state.originalAmount,
+            amountLeft: this.state.amountLeft,
             listinglink: this.state.listinglink,
             status: this.state.status,
             dateadded: this.state.dateadded,
-            datesold: this.state.datesold
         }
 
         axios.post('http://localhost:5000/listings/add', listing)
@@ -179,16 +170,6 @@ export default class CreateListingModal extends Component {
                                 <DatePicker
                                     selected={this.state.dateadded}
                                     onChange={this.onChangeDateAdded}
-                                />
-                            </div>
-                        </div>
-                        {/* Date Sold */}
-                        <div className='form-group'>
-                            <label>Date Sold: </label>
-                            <div>
-                                <DatePicker
-                                    selected={this.state.datesold}
-                                    onChange={this.onChangeDateSold}
                                 />
                             </div>
                         </div>
