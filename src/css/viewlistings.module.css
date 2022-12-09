@@ -1,0 +1,8 @@
+.listing-table {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.listing-table-head > tr > th {
+    font-weight: 500;
+}

@@ -1,0 +1,75 @@
+.card {
+    width: 185px;
+    height: 185px;
+    margin-top: 10px;
+    margin-right: 60px;
+}
+
+.date-range-rev {
+    width: 225px;
+    margin-top: 0px;
+    margin-right: 10px;
+}
+
+.date-range-ct {
+    text-align: left; 
+    padding-top: 5px;
+}
+
+.card-title {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+}
+
+.card-title-pack {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+    color: #0062ff;
+}
+
+.card-title-ship {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+    color: #ff5100;
+}
+
+.card-title-del {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 48px;
+    color: #108700;
+}
+
+.card-text {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 18px;
+}
+
+.inv-sum-c {
+    margin-top: 80px;
+    margin-left: 50px;
+}
+
+.inv-sum-r {
+    width: 300px; 
+    text-align: center;
+}
+
+.inv-sum-p {
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.dash-table {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.dash-table-head > tr > th {
+    font-weight: 500;
+}

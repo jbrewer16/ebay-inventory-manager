@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import '../css/dashboard.css'
+import styles from '../css/dashboard.module.css'
 
 const Order = props => (
   <tr>
@@ -76,7 +76,7 @@ export default class Dashboard extends Component {
 
   getInventoryCount() {
     return this.state.listings.reduce((count, listing) => {
-      if(listing.status === "Listed") {
+      if (listing.status === "Listed") {
         return count = count + Number(listing.amount);
       } else {
         return count;
@@ -86,7 +86,7 @@ export default class Dashboard extends Component {
 
   getInventoryPriceSummary() {
     return (this.state.listings.reduce((sum, listing) => {
-      if(listing.status === "Listed") {
+      if (listing.status === "Listed") {
         return sum + (Number(listing.amount) * Number(listing.item.price))
       } else {
         return sum;
@@ -166,7 +166,7 @@ export default class Dashboard extends Component {
     this.setState({ dateRange: e.target.value }, () => {
       this.getListingStatus()
     });
-    
+
   }
 
   render() {
@@ -174,47 +174,47 @@ export default class Dashboard extends Component {
       <div className="container">
         <div className="row">
           {/* To be packed card */}
-          <div className="card" style={{ width: "185px", height: "185px", marginTop: "10px", marginRight: "60px" }}>
+          <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className="card-title" style={{ textAlign: "center", paddingTop: "30px", fontSize: "48px" }}>
+              <div className={`card-title ${styles["card-title-pack"]}`}>
                 {this.state.toBePacked}
               </div>
-              <div className="card-text" style={{ textAlign: "center", paddingTop: "20px", fontSize: "18px" }}>
+              <div className={`card-text ${styles["card-text"]}`}>
                 To be packed
               </div>
             </div>
           </div>
           {/* To be shipped card */}
-          <div className="card" style={{ width: "185px", height: "185px", marginTop: "10px", marginRight: "60px" }}>
+          <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className="card-title" style={{ textAlign: "center", paddingTop: "30px", fontSize: "48px" }}>
+              <div className={`card-title ${styles["card-title-ship"]}`}>
                 {this.state.toBeShipped}
               </div>
-              <div className="card-text" style={{ textAlign: "center", paddingTop: "20px", fontSize: "18px" }}>
+              <div className={`card-text ${styles["card-text"]}`}>
                 To be shipped
               </div>
             </div>
           </div>
           {/* To be delivered card */}
-          <div className="card" style={{ width: "185px", height: "185px", marginTop: "10px", marginRight: "60px" }}>
+          <div className={`${styles.card} card`}>
             <div className="card-body">
-              <div className="card-title" style={{ textAlign: "center", paddingTop: "30px", fontSize: "48px" }}>
+              <div className={`card-title ${styles["card-title-del"]}`}>
                 {this.state.toBeDelivered}
               </div>
-              <div className="card-text" style={{ textAlign: "center", paddingTop: "20px", fontSize: "18px" }}>
+              <div className={`card-text ${styles["card-text"]}`}>
                 To be delivered
               </div>
             </div>
           </div>
-          <div className="col" style={{ marginTop: "80px", marginLeft: "50px" }}>
-            <div className="row" style={{ width: "300px", textAlign: "center" }}>
+          <div className={`col ${styles["inv-sum-c"]}`}>
+            <div className={`row ${styles["inv-sum-r"]}`}>
               <p>Inventory Summary</p>
             </div>
-            <div className="row" style={{ width: "300px", textAlign: "center" }}>
-              <p style={{ borderStyle: "solid" }}>Number of items: {this.getInventoryCount()}</p>
+            <div className={`row ${styles["inv-sum-r"]}`}>
+              <p className={styles["inv-sum-p"]}>Number of items: {this.getInventoryCount()}</p>
             </div>
-            <div className="row" style={{ width: "300px", textAlign: "center" }}>
-              <p style={{ borderStyle: "solid" }}>Price of items: ${this.getInventoryPriceSummary()}</p>
+            <div className={`row ${styles["inv-sum-r"]}`}>
+              <p className={styles["inv-sum-p"]}>Price of items: ${this.getInventoryPriceSummary()}</p>
             </div>
           </div>
         </div>
@@ -233,19 +233,18 @@ export default class Dashboard extends Component {
               </select>
               days
             </p>
-            {/* To be delivered card */}
-            <div className="card" style={{ width: "225px", marginTop: "0px", marginRight: "10px" }}>
+            <div className={`${styles["date-range-rev"]} card`}>
               <div className="card-body">
-                <div className="card-text" style={{ textAlign: "left", paddingTop: "5px" }}>
+                <div className={`${styles["date-range-ct"]}`}>
                   Number of items: {this.getSalesDetails()[0]}
                 </div>
-                <div className="card-text" style={{ textAlign: "left", paddingTop: "5px" }}>
+                <div className={`${styles["date-range-ct"]}`}>
                   Total Revenue: ${this.getSalesDetails()[1].toFixed(2)}
                 </div>
-                <div className="card-text" style={{ textAlign: "left", paddingTop: "5px" }}>
+                <div className={`${styles["date-range-ct"]}`}>
                   Total Costs: ${this.getSalesDetails()[2].toFixed(2)}
                 </div>
-                <div className="card-text" style={{ textAlign: "left", paddingTop: "5px" }}>
+                <div className={`${styles["date-range-ct"]}`}>
                   Profit: ${this.getSalesDetails()[3].toFixed(2)}
                 </div>
               </div>
@@ -255,8 +254,8 @@ export default class Dashboard extends Component {
             <p>
               Order details last {this.state.dateRange} days
             </p>
-            <table>
-              <thead>
+            <table className={`table ${styles["dash-table"]}`}>
+              <thead className={`${styles["dash-table-head"]}`}>
                 <tr>
                   <th>Item #</th>
                   <th>Item Name</th>
