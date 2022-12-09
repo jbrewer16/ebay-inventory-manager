@@ -49,6 +49,11 @@ export default class EditOrder extends Component {
                     amountOrdered: res.data.amountOrdered,
                     status: res.data.status,
                     dateSold: new Date(res.data.datesold),
+                }, () => {
+                    axios.get('http://localhost:5000/listings/' + this.state.listing._id)
+                    .then(res => {
+                        this.setState({ listing: res.data })
+                    })
                 });
             })
             .catch(err => console.log('Error: ' + err));

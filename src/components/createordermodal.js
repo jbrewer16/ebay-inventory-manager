@@ -49,15 +49,11 @@ export default class CreateOrderModal extends Component {
                 if (response.data.length > 0) {
                     this.setState({
                         listings: response.data.map(listing => listing),
-                        // listingId: response.data[0]._id,
-                        // listing: response.data[0]
                     }, () => {
                         let i = 0;
                         let validReached = false;
                         while((i < this.state.listings.length) && validReached === false) {
-                            console.log(this.state.listings[i].amountLeft)
                             if(this.state.listings[i].amountLeft > 0) {
-                                console.log('here')
                                 this.setState({
                                     listingId: this.state.listings[i]._id,
                                     listing: this.state.listings[i]
